@@ -1,32 +1,38 @@
 import * as S from './Header_Style';
-import { AiFillStar } from 'react-icons/ai';
 import { BiChevronDown } from 'react-icons/bi';
-import { BsFillChatFill } from 'react-icons/bs';
-import { BiDockTop } from 'react-icons/bi';
 import { FaUserAlt } from 'react-icons/fa';
+import { BsFillPinFill } from 'react-icons/bs';
+import { RiFileCopyFill } from 'react-icons/ri';
 
 export default function Header() {
   return (
     <S.HeaderWrap>
       <S.Header>
         <S.LeftHeader>
-          <AiFillStar />
+          <S.StarIcon />
           <S.HeaderText>Genernal</S.HeaderText>
           <BiChevronDown />
         </S.LeftHeader>
         <S.CenterHeader>
           <S.ChannelsBox>
-            <BsFillChatFill />
-            <S.Channels>Channels</S.Channels>
+            <S.FileIcon />
+            <S.Channels>채널</S.Channels>
           </S.ChannelsBox>
           <S.IdeationBox>
-            <BiDockTop />
-            <S.Ideation>Ideation</S.Ideation>
+            <S.IdeationIcon />
+            <S.Ideation>아이디어</S.Ideation>
           </S.IdeationBox>
         </S.CenterHeader>
         <S.RightHeader>
           <FaUserAlt />
           <S.UserCount>5</S.UserCount>
+          <BsFillPinFill />
+          <S.PinCount>0</S.PinCount>
+          <RiFileCopyFill />
+          <S.FileCount>0</S.FileCount>
+          <S.ZipBox>
+            <S.FolderIcon />
+          </S.ZipBox>
         </S.RightHeader>
       </S.Header>
     </S.HeaderWrap>
