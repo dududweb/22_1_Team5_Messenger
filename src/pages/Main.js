@@ -1,3 +1,3 @@
 export default function Main() {
-  return <div>오 된다된다 </div>;
+  return <div>메인페이지</div>;
 }

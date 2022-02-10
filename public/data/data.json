@@ -1,0 +1,23 @@
+[
+  {
+    "userId": "ty123",
+    "useName": "김태영",
+    "profileImage": "https://images.unsplash.com/photo-1622542796254-5b9c46ab0d2f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+    "date": "2022-02-11",
+    "content": ["안녕하세요.", "하이"]
+  },
+  {
+    "userId": "jh123",
+    "useName": "김재호",
+    "profileImage": "https://images.unsplash.com/photo-1534196511436-921a4e99f297?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+    "date": "2022-02-11",
+    "content": ["좋은 아침입니다."]
+  },
+  {
+    "userId": "jy123",
+    "useName": "황주영",
+    "profileImage": "https://images.unsplash.com/photo-1621536597333-11b82f3b2633?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+    "date": "2022-02-11",
+    "content": ["하하하하하하", "오늘은 금요일"]
+  }
+]
