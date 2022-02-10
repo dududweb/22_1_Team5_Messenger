@@ -6,7 +6,7 @@ export default function Login() {
       <S.Logo />
       <S.Login>
         <S.LoginWrap>
-          <S.LoginTitle>Swit 회원가입</S.LoginTitle>
+          <S.LoginTitle>"Swit Simple, All In One"</S.LoginTitle>
           <S.ProfileContainer>
             <S.RoundProfile>
               <S.ProfilePreviewImage src="" />

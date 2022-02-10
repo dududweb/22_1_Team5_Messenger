@@ -24,8 +24,8 @@ export const LoginWrap = styled.div`
   padding: 20px;
 `;
 
-export const LoginTitle = styled.h1`
-  font-size: 28px;
+export const LoginTitle = styled.blockquote`
+  font-size: 30px;
   font-weight: bold;
 `;
 
