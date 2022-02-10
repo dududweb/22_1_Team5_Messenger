@@ -6,7 +6,6 @@ import { FiSend } from 'react-icons/fi';
 import { CgFormatText } from 'react-icons/cg';
 
 export const Container = styled.div`
-  width: calc(100% - 300px);
   height: calc(100vh - 84px);
   padding: 4 20px;
   background-color: #f1f1f1;
@@ -32,6 +31,8 @@ export const DayText = styled.span`
 `;
 
 export const MessageEditorContainer = styled.div`
+  position: fixed;
+  bottom: 0;
   width: calc(100% - 340px);
   background-color: #f1f1f1;
   padding: 20px;
