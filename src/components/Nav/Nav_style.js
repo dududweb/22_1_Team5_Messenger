@@ -9,7 +9,6 @@ export const Nav = styled.nav`
 `;
 export const NavConainer = styled.section`
   display: flex;
-  align-items: center;
   padding: 20px 6px;
 `;
 export const NavConainerImg = styled.img`
@@ -31,7 +30,6 @@ export const ChannelsConainer = styled.section`
 `;
 export const ChannelsName = styled.span`
   display: flex;
-  align-items: center;
 `;
 export const ChannelsNameImg = styled.img`
   width: 12px;
