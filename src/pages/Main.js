@@ -1,5 +1,6 @@
 import Nav from '../components/Nav/Nav';
 import Header from '../components/Header/Header';
+import ChatRoom from './chatroom/ChatRoom';
 import * as S from './Main_Style';
 
 export default function Main() {
@@ -8,7 +9,7 @@ export default function Main() {
       <Nav />
       <S.SubContainer>
         <Header />
-        {/* 채팅내역 필드 위치??? */}
+        <ChatRoom />
       </S.SubContainer>
     </S.MainContainer>
   );
