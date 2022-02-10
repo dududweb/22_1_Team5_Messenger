@@ -1,3 +1,9 @@
+import Login from './login/Login';
+
 export default function Main() {
-  return <div>오 된다된다 </div>;
+  return (
+    <div>
+      <Login />
+    </div>
+  );
 }
