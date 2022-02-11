@@ -85,7 +85,7 @@ export default function ChatRoom() {
                       {list.chatList.chatList}
                     </S.TypingText>
                     <S.Reply />
-                    <S.Delete onClick={() => onRemove(list.id)} />
+                    <S.Delete onClick={() => onRemove()} />
                   </S.ContentsContainer>
                 );
               })}
