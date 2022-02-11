@@ -4,14 +4,17 @@ import * as S from './ChatRoom_Style';
 import ChatContentsList from './ChatContentsList';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { add_user_inputText } from '../../redux/action/action.js';
-import { MdOutlineCreate } from 'react-icons/md';
+import { add_user_inputText } from '../../redux/action/inputChatAction';
 
 export default function ChatRoom() {
   const dispatch = useDispatch();
+  const userdata = useSelector(state => state.userinfo);
+  const userChat = useSelector(state => state.chat);
   let [ChatContents, setChatContents] = useState();
   const selector = useSelector(state => state.userinfo);
   const selector2 = useSelector(state => state.chat);
+  console.log(userdata);
+  console.log(userChat);
 
   useEffect(() => {
     axios
@@ -23,6 +26,24 @@ export default function ChatRoom() {
   }, []);
 
   // ============================================================
+  const [input, setInput] = useState('');
+  console.log(input);
+
+  const handleChange2 = e => {
+    const { value } = e.target;
+    setInput(value);
+  };
+
+  const handleChange3 = e => {
+    e.preventDefault();
+
+    const userInputData = {
+      chatList: input,
+    };
+
+    dispatch(add_user_inputText(userInputData));
+    setInput('');
+  };
 
   // ============================================================
 
@@ -40,12 +61,13 @@ export default function ChatRoom() {
           })}
         </div>
         <div>
-          <div>{selector[1].nickname}</div>
-          <div>{selector2[selector2.length - 1]}</div>
+          {userChat?.map(list => {
+            return <div key={list.id}>{list.chatList.chatList}</div>;
+          })}
         </div>
       </S.Container>
       <S.MessageEditorContainer>
-        <S.MessageEditorWrapper onClick={handleSubmit}>
+        <S.MessageEditorWrapper>
           <S.PlusIcon />
           <S.TextInput
             placeholder="Enter message"
@@ -56,7 +78,7 @@ export default function ChatRoom() {
             <S.TextIcon />
             <S.AtSignIcon />
             <S.EmojiIcon />
-            <S.EnterIcon />
+            <S.EnterIcon onClick={handleChange3} />
           </div>
         </S.MessageEditorWrapper>
       </S.MessageEditorContainer>
