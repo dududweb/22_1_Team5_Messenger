@@ -13,24 +13,19 @@ export default function Login() {
   const navigate = useNavigate();
   const [userEmail, setUserEmail] = useState('');
   const [userNickname, setUserNickname] = useState('');
-  const [profileImage, setProfileImage] = useState({
-    privewImgUrl: '',
-    profileFile: '',
-  });
+  const [profileImage, setProfileImage] = useState('');
+
   const uploadImage = e => {
     e.preventDefault();
     let reader = new FileReader();
     let file = e.target.files[0];
     reader.onloadend = () => {
-      setProfileImage({
-        profileFile: file,
-        privewImgUrl: reader.result,
-      });
+      setProfileImage(reader.result);
     };
     reader.readAsDataURL(file);
   };
 
-  dispatch(add_ProfileImage(profileImage.privewImgUrl));
+  dispatch(add_ProfileImage(profileImage));
 
   const changeUserIdInput = e => {
     const { value } = e.target;
@@ -73,11 +68,7 @@ export default function Login() {
           <S.ProfileContainer>
             <S.RoundProfile>
               <S.ProfilePreviewImage
-                src={
-                  profileImage.privewImgUrl
-                    ? profileImage.privewImgUrl
-                    : ProfileDefaultImg
-                }
+                src={profileImage ? profileImage : ProfileDefaultImg}
               />
             </S.RoundProfile>
             <S.UploadBtn>

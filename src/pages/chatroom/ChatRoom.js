@@ -10,6 +10,7 @@ export default function ChatRoom() {
   const dispatch = useDispatch();
   const userdata = useSelector(state => state.login.userinfo);
   const userChat = useSelector(state => state.input.chat);
+  console.log(userdata);
   const [userMessage, setUserMessage] = useState('');
   const [ChatContents, setChatContents] = useState();
 
