@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import * as S from './ChatRoom_Style';
 import ChatContentsList from './ChatContentsList';
@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { add_user_inputText } from '../../redux/action/inputChatAction';
 
 export default function ChatRoom() {
+  const userid = useRef();
   const dispatch = useDispatch();
   const userdata = useSelector(state => state.userinfo);
   const userChat = useSelector(state => state.chat);
@@ -23,6 +24,8 @@ export default function ChatRoom() {
       .catch(error => setChatContents(error));
   }, []);
 
+  console.log('ChatContents', ChatContents);
+
   // ============================================================
   const [input, setInput] = useState('');
   console.log(input);
@@ -34,14 +37,20 @@ export default function ChatRoom() {
 
   const handleChange3 = e => {
     e.preventDefault();
-
     const userInputData = {
       chatList: input,
     };
-
     dispatch(add_user_inputText(userInputData));
     setInput('');
   };
+
+  const onRemove1 = id => {
+    setChatContents(ChatContents.filter(userid => userid.id !== id));
+  };
+
+  // const onRemove2 = id => {
+  //   setInput(userChat.filter(chat => chat.id !== id));
+  // };
 
   // ============================================================
 
@@ -55,7 +64,15 @@ export default function ChatRoom() {
         </S.LineWrapper>
         <div>
           {ChatContents?.map((contents, i) => {
-            return <ChatContentsList key={i} contents={contents} />;
+            return (
+              <ChatContentsList
+                key={i}
+                contents={contents}
+                onRemove1={onRemove1}
+                ref={userid}
+                // onRemove={onRemove}
+              />
+            );
           })}
         </div>
         <div>
