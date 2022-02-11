@@ -5,6 +5,7 @@ import ChatContentsList from './ChatContentsList';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { add_user_inputText } from '../../redux/action/inputChatAction';
+import { delete_user_inputText } from '../../redux/action/deleteAction';
 
 export default function ChatRoom() {
   const dispatch = useDispatch();
@@ -13,6 +14,16 @@ export default function ChatRoom() {
   const [userMessage, setUserMessage] = useState('');
   const [ChatContents, setChatContents] = useState();
 
+  console.log('userdata', userdata);
+  // console.log('userChat', userChat);
+  // console.log('ChatContents', ChatContents);
+  // console.log('userMessage', userMessage);
+
+  const [Reply, setReply] = useState(false);
+
+  function DeleteInput() {
+    setReply(prev => !prev);
+  }
   useEffect(() => {
     axios
       .get('/data/data.json')
@@ -50,6 +61,10 @@ export default function ChatRoom() {
     }
   };
 
+  const onRemove = userId => {
+    dispatch(delete_user_inputText(userId));
+  };
+
   return (
     <>
       <S.Container>
@@ -60,7 +75,13 @@ export default function ChatRoom() {
         </S.LineWrapper>
         <div>
           {ChatContents?.map((contents, i) => {
-            return <ChatContentsList key={i} contents={contents} />;
+            return (
+              <ChatContentsList
+                key={i}
+                contents={contents}
+                DeleteInput={DeleteInput}
+              />
+            );
           })}
         </div>
         {userChat.length >= 1 && (
@@ -70,9 +91,13 @@ export default function ChatRoom() {
               <S.UserName>{userdata[0][1].nickname}</S.UserName>
               {userChat?.map(list => {
                 return (
-                  <S.TypingText key={list.id}>
-                    {list.chatList.chatList}
-                  </S.TypingText>
+                  <S.ContentsContainer>
+                    <S.TypingText key={list.id}>
+                      {list.chatList.chatList}
+                    </S.TypingText>
+                    <S.Reply onClick={DeleteInput} />
+                    <S.Delete />
+                  </S.ContentsContainer>
                 );
               })}
             </span>
@@ -80,6 +105,20 @@ export default function ChatRoom() {
         )}
       </S.Container>
       <S.MessageEditorContainer>
+        {Reply ? (
+          <S.ReplyContainer>
+            <S.ReplyBox>
+              <S.ReplyIconBox>
+                <S.ReplyIcon />
+              </S.ReplyIconBox>
+              <S.TextBox>DATA 에게 답장</S.TextBox>
+              <S.Textdetail>바보똥개 멍청이</S.Textdetail>
+              <S.TextDate>2202.01.13</S.TextDate>
+              <S.DeleteIcon onClick={DeleteInput} />
+            </S.ReplyBox>
+          </S.ReplyContainer>
+        ) : null}
+
         <S.MessageEditorWrapper>
           <S.PlusIcon />
           <S.TextInput

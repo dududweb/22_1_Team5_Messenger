@@ -29,6 +29,7 @@ export default function Login() {
     const { value } = e.target;
     setUserEmail(value);
   };
+
   const changeUserNicknameInput = e => {
     const { value } = e.target;
     setUserNickname(value);

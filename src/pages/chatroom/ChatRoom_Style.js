@@ -4,6 +4,9 @@ import { HiOutlineEmojiHappy } from 'react-icons/hi';
 import { MdAlternateEmail } from 'react-icons/md';
 import { FiSend } from 'react-icons/fi';
 import { CgFormatText } from 'react-icons/cg';
+import { MdArrowForward } from 'react-icons/md';
+import { TiDeleteOutline } from 'react-icons/ti';
+import { HiOutlineReply } from 'react-icons/hi';
 
 export const Container = styled.div`
   height: calc(100vh - 84px);
@@ -58,6 +61,48 @@ export const TextInput = styled.input`
   }
 `;
 
+export const ReplyContainer = styled.div`
+  margin-top: 3px;
+`;
+
+export const ReplyBox = styled.div`
+  border: 1px solid #e6e6e8;
+  border-bottom: none;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  height: 44px;
+`;
+export const ReplyIconBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 41px;
+  height: 40px;
+`;
+
+export const ReplyIcon = styled(MdArrowForward)`
+  font-size: 23px;
+`;
+
+export const TextBox = styled.div`
+  margin-left: 20px;
+  font-size: 14px;
+`;
+export const Textdetail = styled.div`
+  font-size: 14px;
+  margin-left: 20px;
+  font-weight: 700;
+`;
+
+export const TextDate = styled.div`
+  font-size: 14px;
+  margin-left: 20px;
+`;
+
+export const DeleteIcon = styled(TiDeleteOutline)`
+  margin-left: 10px;
+`;
 export const PlusIcon = styled(HiPlus)`
   font-size: 20px;
   padding: 10px;
@@ -117,4 +162,13 @@ export const UserName = styled.div`
 export const TypingText = styled.div`
   font-size: 16px;
   padding: 4px 0;
+  margin-right: 20px;
 `;
+
+export const ContentsContainer = styled.div`
+  display: flex;
+`;
+
+export const Delete = styled(TiDeleteOutline)``;
+
+export const Reply = styled(HiOutlineReply)``;
