@@ -4,21 +4,17 @@ import { useDispatch } from 'react-redux';
 import { add_loginUser_info } from '../../redux/action/loginAction';
 import { useNavigate } from 'react-router-dom';
 
-import { useSelector } from 'react-redux';
-
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [userEmail, setUserEmail] = useState('');
   const [userNickname, setUserNickname] = useState('');
 
-  const data = useSelector(state => state.userinfo);
-  console.log(data);
-
   const changeUserIdInput = e => {
     const { value } = e.target;
     setUserEmail(value);
   };
+
   const changeUserNicknameInput = e => {
     const { value } = e.target;
     setUserNickname(value);
@@ -29,17 +25,20 @@ export default function Login() {
       userEmail: userEmail,
       nickname: userNickname,
     };
-    // console.log('userInputData', userInputData);
     dispatch(add_loginUser_info(userInputData));
     setUserEmail('');
     navigate('/main');
   };
 
   const handleKeyPress = e => {
+    e.preventDefault();
     if (e.key === 'Enter') {
-      if (userEmail && userNickname === true) {
+      if (userEmail && userNickname !== '') {
         setUserEmail();
         setUserNickname();
+        navigate('/main');
+      } else {
+        alert('아이디와 닉네임을 모두 입력해주세요.');
       }
     }
   };
@@ -64,13 +63,13 @@ export default function Login() {
             <S.UserIdInput
               onChange={changeUserIdInput}
               value={userEmail}
-              onKeyDown={handleKeyPress}
+              onKeyUp={handleKeyPress}
             />
             <S.Label>닉네임</S.Label>
             <S.UserNicknameInput
               onChange={changeUserNicknameInput}
               value={userNickname}
-              onKeyDown={handleKeyPress}
+              onKeyUp={handleKeyPress}
             />
             <S.FormSubmit onClick={saveUserDataInStore}>Start Now</S.FormSubmit>
           </S.LoginForm>
