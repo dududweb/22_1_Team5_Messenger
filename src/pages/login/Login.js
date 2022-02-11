@@ -5,7 +5,7 @@ import { add_loginUser_info } from '../../redux/action/action.js';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-export default function Login(props) {
+export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const selector = useSelector(state => state.userinfo);

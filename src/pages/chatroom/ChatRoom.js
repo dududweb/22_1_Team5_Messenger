@@ -2,16 +2,16 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import * as S from './ChatRoom_Style';
 import ChatContentsList from './ChatContentsList';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { add_user_inputText } from '../../redux/action/action.js';
 
 export default function ChatRoom() {
   const dispatch = useDispatch();
   let [ChatContents, setChatContents] = useState();
+  const [chatInput, setChatInput] = useState('');
   const selector = useSelector(state => state.userinfo);
-  const selector2 = useSelector(state => state.chat);
-  console.log(selector);
+  const selector2 = useSelector(state => state);
+  // console.log(selector);
   console.log(selector2);
 
   useEffect(() => {
@@ -23,33 +23,20 @@ export default function ChatRoom() {
       .catch(error => setChatContents(error));
   }, []);
 
-  // ============================================================
-  const [input, setInput] = useState('');
-  const [input2, setInput2] = useState([]);
-  console.log(input);
-  console.log(input2);
-
-  const handleChange2 = e => {
+  const getChatInput = e => {
     const { value } = e.target;
-    setInput(value);
+    setChatInput(value);
   };
 
-  const handleChange3 = e => {
+  const submitChat = e => {
     e.preventDefault();
-    setInput2([...input2, input]);
-    setInput('');
-
-    const userInputData = input2;
-
-    dispatch(add_user_inputText(userInputData));
+    dispatch(add_user_inputText(chatInput));
+    setChatInput('');
   };
 
-  // const handleClick = () => {
-  //   const userInputData = input2;
-
-  //   dispatch(add_user_inputText(userInputData));
-  // };
-  // ============================================================
+  const handleKeyPress = e => {
+    e.key === 'Enter' && submitChat();
+  };
 
   return (
     <>
@@ -71,18 +58,19 @@ export default function ChatRoom() {
         </div>
       </S.Container>
       <S.MessageEditorContainer>
-        <S.MessageEditorWrapper onClick={handleChange3}>
+        <S.MessageEditorWrapper>
           <S.PlusIcon />
           <S.TextInput
             placeholder="Enter message"
-            onChange={handleChange2}
-            value={input}
+            onChange={getChatInput}
+            value={chatInput}
+            onKeyDown={handleKeyPress}
           />
           <div>
             <S.TextIcon />
             <S.AtSignIcon />
             <S.EmojiIcon />
-            <S.EnterIcon />
+            <S.EnterIcon onClick={submitChat} />
           </div>
         </S.MessageEditorWrapper>
       </S.MessageEditorContainer>

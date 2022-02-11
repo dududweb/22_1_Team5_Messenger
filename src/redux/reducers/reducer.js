@@ -1,9 +1,10 @@
-import { LOGIN, LOGOUT, CHAT } from '../action/action.js';
+import { LOGIN, LOGOUT, ADD_CHAT } from '../action/action.js';
 
 const initialState = {
   userinfo: {
     userEmail: '',
     nickname: '',
+    profileImg: '',
     contents: [],
   },
 };
@@ -13,8 +14,6 @@ export const reducer = (state = initialState, action) => {
 
   if (action.type === LOGIN) {
     return {
-      // 만약 다른 state 가 존재한다면 전개 연산 ...state 를 해야함
-      // 하지만 현재 state 에는 todos 하나 뿐이라 todos 만 반환하면 됨
       userinfo: [{ ...newState.userinfo }, action.user],
     };
   } else if (action.type === LOGOUT) {
@@ -26,22 +25,13 @@ export const reducer = (state = initialState, action) => {
   }
 };
 
-//==========
-
-const initialState2 = {
-  chat: [],
-};
+const initialState2 = [{ id: 1, text: '' }];
 
 export const reducer2 = (state = initialState2, action) => {
-  const newState = { ...state };
-
-  if (action.type === CHAT) {
-    return {
-      // 만약 다른 state 가 존재한다면 전개 연산 ...state 를 해야함
-      // 하지만 현재 state 에는 todos 하나 뿐이라 todos 만 반환하면 됨
-      chat: [...newState.chat, action.chatList],
-    };
-  } else {
-    return state;
+  switch (action.type) {
+    case ADD_CHAT:
+      return state.concat(action.chatList);
+    default:
+      return state;
   }
 };
