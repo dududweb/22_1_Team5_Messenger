@@ -4,7 +4,7 @@ const initialState = {
   userinfo: {
     userEmail: '',
     nickname: '',
-    contents: [],
+    // contents: [],
   },
 };
 

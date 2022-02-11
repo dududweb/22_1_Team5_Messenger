@@ -5,14 +5,13 @@ import ChatContentsList from './ChatContentsList';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { add_user_inputText } from '../../redux/action/action.js';
+import { MdOutlineCreate } from 'react-icons/md';
 
 export default function ChatRoom() {
   const dispatch = useDispatch();
   let [ChatContents, setChatContents] = useState();
   const selector = useSelector(state => state.userinfo);
   const selector2 = useSelector(state => state.chat);
-  console.log(selector);
-  console.log(selector2);
 
   useEffect(() => {
     axios
@@ -24,31 +23,7 @@ export default function ChatRoom() {
   }, []);
 
   // ============================================================
-  const [input, setInput] = useState('');
-  const [input2, setInput2] = useState([]);
-  console.log(input);
-  console.log(input2);
 
-  const handleChange2 = e => {
-    const { value } = e.target;
-    setInput(value);
-  };
-
-  const handleChange3 = e => {
-    e.preventDefault();
-    setInput2([...input2, input]);
-    setInput('');
-
-    const userInputData = input2;
-
-    dispatch(add_user_inputText(userInputData));
-  };
-
-  // const handleClick = () => {
-  //   const userInputData = input2;
-
-  //   dispatch(add_user_inputText(userInputData));
-  // };
   // ============================================================
 
   return (
@@ -65,13 +40,12 @@ export default function ChatRoom() {
           })}
         </div>
         <div>
-          {/* <div>{selector[1].nickname}</div>
-          <div>{selector[1].userEmail}</div>
-          <div>{selector[1].contents}</div> */}
+          <div>{selector[1].nickname}</div>
+          <div>{selector2[selector2.length - 1]}</div>
         </div>
       </S.Container>
       <S.MessageEditorContainer>
-        <S.MessageEditorWrapper onClick={handleChange3}>
+        <S.MessageEditorWrapper onClick={handleSubmit}>
           <S.PlusIcon />
           <S.TextInput
             placeholder="Enter message"

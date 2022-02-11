@@ -11,8 +11,9 @@ export default function Login(props) {
   const selector = useSelector(state => state.userinfo);
   const [userEmail, setUserEmail] = useState('');
   const [userNickname, setUserNickname] = useState('');
-  console.log(selector);
-  console.log(userEmail);
+  // console.log('userNickname>>', userNickname);
+  // console.log('userEmail>>', userEmail);
+  // console.log('selector>>', selector);
 
   const handleChange = e => {
     const { value } = e.target;
@@ -28,7 +29,7 @@ export default function Login(props) {
       userEmail: userEmail,
       nickname: userNickname,
     };
-
+    // console.log('userInputData', userInputData);
     dispatch(add_loginUser_info(userInputData));
     setUserEmail('');
     navigate('/main');
