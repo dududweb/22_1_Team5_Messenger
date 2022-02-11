@@ -51,7 +51,7 @@ export const ProfilePreviewImage = styled.img.attrs(props => ({
 `;
 
 export const UploadBtn = styled.label.attrs({
-  for: 'fileInput',
+  htmlFor: 'fileInput',
 })`
   position: absolute;
   right: 0;
