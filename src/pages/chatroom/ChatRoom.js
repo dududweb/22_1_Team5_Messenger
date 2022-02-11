@@ -11,8 +11,6 @@ export default function ChatRoom() {
   const userdata = useSelector(state => state.userinfo);
   const userChat = useSelector(state => state.chat);
   let [ChatContents, setChatContents] = useState();
-  const selector = useSelector(state => state.userinfo);
-  const selector2 = useSelector(state => state.chat);
   console.log(userdata);
   console.log(userChat);
 
