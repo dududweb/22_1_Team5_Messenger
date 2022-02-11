@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import ProfileDefaultImg from '../../assets/icons/profile-default.jpeg';
 import { HiOutlineCamera } from 'react-icons/hi';
 import LogoImage from '../../assets/logo-big.svg';
 
@@ -44,9 +43,7 @@ export const RoundProfile = styled.div`
   overflow: hidden;
 `;
 
-export const ProfilePreviewImage = styled.img.attrs(props => ({
-  src: props.Img || ProfileDefaultImg,
-}))`
+export const ProfilePreviewImage = styled.img.attrs(props => ({}))`
   width: 100%;
 `;
 
@@ -65,7 +62,7 @@ export const UploadBtn = styled.label.attrs({
   cursor: pointer;
 `;
 
-export const Test = styled(HiOutlineCamera)`
+export const CameraIcon = styled(HiOutlineCamera)`
   position: absolute;
   top: 2px;
   left: 50%;
@@ -75,6 +72,7 @@ export const Test = styled(HiOutlineCamera)`
 export const ProfileUpload = styled.input.attrs({
   id: 'fileInput',
   type: 'file',
+  accept: 'image/*',
 })`
   position: absolute;
   bottom: 0;

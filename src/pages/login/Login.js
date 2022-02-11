@@ -3,23 +3,32 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { add_loginUser_info } from '../../redux/action/loginAction';
 import { useNavigate } from 'react-router-dom';
-
 import { useSelector } from 'react-redux';
+import ProfileDefaultImg from '../../assets/icons/profile-default.jpeg';
 
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [userEmail, setUserEmail] = useState('');
   const [userNickname, setUserNickname] = useState('');
-  // 파일 미리볼 url을 저장해줄 state
-  const [fileImage, setFileImage] = useState('');
-  // 파일 저장
-  const saveFileImage = e => {
-    setFileImage(URL.createObjectURL(e.target.files[0]));
-  };
-  // 파일 삭제 const deleteFileImage = () => { URL.revokeObjectURL(fileImage); setFileImage(""); };
+  const [profileImage, setProfileImage] = useState({
+    privewImgUrl: '',
+    profileFile: '',
+  });
 
-  const data = useSelector(state => state.userinfo);
+  const uploadImage = e => {
+    e.preventDefault();
+    let reader = new FileReader();
+    let file = e.target.files[0];
+    reader.onloadend = () => {
+      setProfileImage({
+        profileFile: file,
+        privewImgUrl: reader.result,
+      });
+    };
+    reader.readAsDataURL(file);
+  };
+  console.log(profileImage.privewImgUrl);
 
   const changeUserIdInput = e => {
     const { value } = e.target;
@@ -35,7 +44,7 @@ export default function Login() {
       userEmail: userEmail,
       nickname: userNickname,
     };
-
+    // console.log('userInputData', userInputData);
     dispatch(add_loginUser_info(userInputData));
     setUserEmail('');
     navigate('/main');
@@ -55,15 +64,21 @@ export default function Login() {
       <S.Logo />
       <S.Login>
         <S.LoginWrap>
-          <S.LoginTitle>"Swit Simple, All In One"</S.LoginTitle>
+          <S.LoginTitle>So Swit</S.LoginTitle>
           <S.ProfileContainer>
             <S.RoundProfile>
-              <S.ProfilePreviewImage src="/" />
+              <S.ProfilePreviewImage
+                src={
+                  profileImage.privewImgUrl
+                    ? profileImage.privewImgUrl
+                    : ProfileDefaultImg
+                }
+              />
             </S.RoundProfile>
             <S.UploadBtn>
-              <S.Test />
+              <S.CameraIcon />
             </S.UploadBtn>
-            <S.ProfileUpload />
+            <S.ProfileUpload onChange={uploadImage} />
           </S.ProfileContainer>
           <S.LoginForm>
             <S.Label>아이디</S.Label>
