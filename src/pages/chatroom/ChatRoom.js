@@ -8,8 +8,8 @@ import { add_user_inputText } from '../../redux/action/inputChatAction';
 
 export default function ChatRoom() {
   const dispatch = useDispatch();
-  const userdata = useSelector(state => state.userinfo);
-  const userChat = useSelector(state => state.chat);
+  const userdata = useSelector(state => state.login.userinfo);
+  const userChat = useSelector(state => state.input.chat);
   let [ChatContents, setChatContents] = useState();
   console.log(userdata);
   console.log(userChat);
@@ -24,23 +24,35 @@ export default function ChatRoom() {
   }, []);
 
   // ============================================================
-  const [input, setInput] = useState('');
-  console.log(input);
+  const [userMessage, setUserMessage] = useState('');
+  console.log(userMessage);
 
-  const handleChange2 = e => {
+  const changeInputText = e => {
     const { value } = e.target;
-    setInput(value);
+    setUserMessage(value);
   };
 
-  const handleChange3 = e => {
-    e.preventDefault();
-
+  const changeUserInputTextDispatch = () => {
     const userInputData = {
-      chatList: input,
+      chatList: userMessage,
+    };
+    if (userMessage !== '') {
+      dispatch(add_user_inputText(userInputData));
+      setUserMessage('');
+    }
+  };
+
+  const pressUserInputTextDispatch = e => {
+    const userInputData = {
+      chatList: userMessage,
     };
 
-    dispatch(add_user_inputText(userInputData));
-    setInput('');
+    if (e.key === 'Enter') {
+      if (userMessage !== '') {
+        dispatch(add_user_inputText(userInputData));
+        setUserMessage('');
+      }
+    }
   };
 
   // ============================================================
@@ -58,25 +70,36 @@ export default function ChatRoom() {
             return <ChatContentsList key={i} contents={contents} />;
           })}
         </div>
-        <div>
-          {userChat?.map(list => {
-            return <div key={list.id}>{list.chatList.chatList}</div>;
-          })}
-        </div>
+        {userChat.length >= 1 && (
+          <S.UserMessageContainer>
+            <S.UserImage src="https://images.unsplash.com/photo-1534196511436-921a4e99f297?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" />
+            <span>
+              <S.UserName>{userdata[1].nickname}</S.UserName>
+              {userChat?.map(list => {
+                return (
+                  <S.TypingText key={list.id}>
+                    {list.chatList.chatList}
+                  </S.TypingText>
+                );
+              })}
+            </span>
+          </S.UserMessageContainer>
+        )}
       </S.Container>
       <S.MessageEditorContainer>
         <S.MessageEditorWrapper>
           <S.PlusIcon />
           <S.TextInput
             placeholder="Enter message"
-            onChange={handleChange2}
-            value={input}
+            onChange={changeInputText}
+            onKeyUp={pressUserInputTextDispatch}
+            value={userMessage}
           />
           <div>
             <S.TextIcon />
             <S.AtSignIcon />
             <S.EmojiIcon />
-            <S.EnterIcon onClick={handleChange3} />
+            <S.EnterIcon onClick={changeUserInputTextDispatch} />
           </div>
         </S.MessageEditorWrapper>
       </S.MessageEditorContainer>

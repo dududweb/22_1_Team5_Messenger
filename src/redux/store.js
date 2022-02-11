@@ -4,3 +4,7 @@ import { loginReducer } from './reducers/loginReducer';
 import { inputReducer } from './reducers/inputReducer';
 
 export const store = createStore(rootReducer);
+// export const configureStore = () => {
+//   const store = createStore({ loginReducer, inputReducer });
+//   return store;
+// };
