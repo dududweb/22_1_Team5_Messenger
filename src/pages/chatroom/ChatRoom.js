@@ -19,6 +19,11 @@ export default function ChatRoom() {
   // console.log('ChatContents', ChatContents);
   // console.log('userMessage', userMessage);
 
+  const [Reply, setReply] = useState(false);
+
+  function DeleteInput() {
+    setReply(prev => !prev);
+  }
   useEffect(() => {
     axios
       .get('/data/data.json')
@@ -70,7 +75,13 @@ export default function ChatRoom() {
         </S.LineWrapper>
         <div>
           {ChatContents?.map((contents, i) => {
-            return <ChatContentsList key={i} contents={contents} />;
+            return (
+              <ChatContentsList
+                key={i}
+                contents={contents}
+                DeleteInput={DeleteInput}
+              />
+            );
           })}
         </div>
         {userChat.length >= 1 && (
@@ -84,8 +95,8 @@ export default function ChatRoom() {
                     <S.TypingText key={list.id}>
                       {list.chatList.chatList}
                     </S.TypingText>
-                    <S.Reply />
-                    <S.Delete onClick={() => onRemove(list.id)} />
+                    <S.Reply onClick={DeleteInput} />
+                    <S.Delete />
                   </S.ContentsContainer>
                 );
               })}
@@ -94,6 +105,20 @@ export default function ChatRoom() {
         )}
       </S.Container>
       <S.MessageEditorContainer>
+        {Reply ? (
+          <S.ReplyContainer>
+            <S.ReplyBox>
+              <S.ReplyIconBox>
+                <S.ReplyIcon />
+              </S.ReplyIconBox>
+              <S.TextBox>DATA 에게 답장</S.TextBox>
+              <S.Textdetail>바보똥개 멍청이</S.Textdetail>
+              <S.TextDate>2202.01.13</S.TextDate>
+              <S.DeleteIcon onClick={DeleteInput} />
+            </S.ReplyBox>
+          </S.ReplyContainer>
+        ) : null}
+
         <S.MessageEditorWrapper>
           <S.PlusIcon />
           <S.TextInput
