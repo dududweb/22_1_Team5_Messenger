@@ -1,6 +1,6 @@
 import * as S from './Login_Style';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   add_loginUser_info,
   add_ProfileImage,
@@ -25,8 +25,6 @@ export default function Login() {
     reader.readAsDataURL(file);
   };
 
-  dispatch(add_ProfileImage(profileImage));
-
   const changeUserIdInput = e => {
     const { value } = e.target;
     setUserEmail(value);
@@ -44,6 +42,7 @@ export default function Login() {
     dispatch(add_loginUser_info(userInputData));
     setUserEmail('');
     navigate('/main');
+    dispatch(add_ProfileImage(profileImage));
   };
 
   const handleKeyPress = e => {
@@ -76,7 +75,7 @@ export default function Login() {
             </S.UploadBtn>
             <S.ProfileUpload onChange={uploadImage} />
           </S.ProfileContainer>
-          <S.LoginForm>
+          <S.LoginForm method="POST" onSubmit={saveUserDataInStore}>
             <S.Label>아이디</S.Label>
             <S.UserIdInput
               onChange={changeUserIdInput}
@@ -89,7 +88,9 @@ export default function Login() {
               value={userNickname}
               onKeyUp={handleKeyPress}
             />
-            <S.FormSubmit onClick={saveUserDataInStore}>Start Now</S.FormSubmit>
+            <S.FormSubmit type="submit" onClick={saveUserDataInStore}>
+              Start Now
+            </S.FormSubmit>
           </S.LoginForm>
         </S.LoginWrap>
       </S.Login>

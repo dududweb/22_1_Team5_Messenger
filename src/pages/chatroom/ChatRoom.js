@@ -10,7 +10,6 @@ export default function ChatRoom() {
   const dispatch = useDispatch();
   const userdata = useSelector(state => state.login.userinfo);
   const userChat = useSelector(state => state.input.chat);
-  console.log(userdata);
   const [userMessage, setUserMessage] = useState('');
   const [ChatContents, setChatContents] = useState();
 
@@ -66,9 +65,9 @@ export default function ChatRoom() {
         </div>
         {userChat.length >= 1 && (
           <S.UserMessageContainer>
-            <S.UserImage src={userdata[0][1]} />
+            <S.UserImage src={userdata[1]} />
             <span>
-              <S.UserName>{userdata[1].nickname}</S.UserName>
+              <S.UserName>{userdata[0][1].nickname}</S.UserName>
               {userChat?.map(list => {
                 return (
                   <S.TypingText key={list.id}>

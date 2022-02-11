@@ -2,8 +2,6 @@ export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const UPLOAD = 'UPLOAD';
 
-let id = 1;
-
 export const add_loginUser_info = userInputData => {
   return {
     type: LOGIN,
@@ -21,9 +19,7 @@ export const delete_todo = id => {
   };
 };
 
-export const add_ProfileImage = url => {
-  return {
-    type: UPLOAD,
-    profileImage: url,
-  };
-};
+export const add_ProfileImage = url => ({
+  type: UPLOAD,
+  profileImage: url,
+});
