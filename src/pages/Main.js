@@ -1,13 +1,16 @@
 import Nav from '../components/Nav/Nav';
+import Header from '../components/Header/Header';
+import ChatRoom from './chatroom/ChatRoom';
+import * as S from './Main_Style';
 
 export default function Main() {
   return (
-    <div>
+    <S.MainContainer>
       <Nav />
-      <div>
-        {/* 네비게이션 위치??? */}
-        {/* 채팅내역 필드 위치??? */}
-      </div>
-    </div>
+      <S.SubContainer>
+        <Header />
+        <ChatRoom />
+      </S.SubContainer>
+    </S.MainContainer>
   );
 }
