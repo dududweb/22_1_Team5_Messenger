@@ -29,7 +29,7 @@ export default function Login() {
       userEmail: userEmail,
       nickname: userNickname,
     };
-
+    // console.log('userInputData', userInputData);
     dispatch(add_loginUser_info(userInputData));
     setUserEmail('');
     navigate('/main');
