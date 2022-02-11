@@ -24,7 +24,6 @@ export default function Login() {
       userEmail: userEmail,
       nickname: userNickname,
     };
-
     dispatch(add_loginUser_info(userInputData));
     setUserEmail('');
     navigate('/main');

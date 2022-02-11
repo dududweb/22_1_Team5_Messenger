@@ -1,10 +1,5 @@
 import { createStore } from 'redux';
 import rootReducer from './reducers/index';
-import { loginReducer } from './reducers/loginReducer';
-import { inputReducer } from './reducers/inputReducer';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-export const store = createStore(rootReducer);
-// export const configureStore = () => {
-//   const store = createStore({ loginReducer, inputReducer });
-//   return store;
-// };
+export const store = createStore(rootReducer, composeWithDevTools());

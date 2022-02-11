@@ -10,9 +10,8 @@ export default function ChatRoom() {
   const dispatch = useDispatch();
   const userdata = useSelector(state => state.login.userinfo);
   const userChat = useSelector(state => state.input.chat);
-  let [ChatContents, setChatContents] = useState();
-  console.log(userdata);
-  console.log(userChat);
+  const [userMessage, setUserMessage] = useState('');
+  const [ChatContents, setChatContents] = useState();
 
   useEffect(() => {
     axios
@@ -22,10 +21,6 @@ export default function ChatRoom() {
       })
       .catch(error => setChatContents(error));
   }, []);
-
-  // ============================================================
-  const [userMessage, setUserMessage] = useState('');
-  console.log(userMessage);
 
   const changeInputText = e => {
     const { value } = e.target;
@@ -54,8 +49,6 @@ export default function ChatRoom() {
       }
     }
   };
-
-  // ============================================================
 
   return (
     <>
