@@ -86,9 +86,9 @@ export default function ChatRoom() {
         </div>
         {userChat.length >= 1 && (
           <S.UserMessageContainer>
-            <S.UserImage src="https://images.unsplash.com/photo-1534196511436-921a4e99f297?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" />
+            <S.UserImage src={userdata[1]} />
             <span>
-              <S.UserName>{userdata[1].nickname}</S.UserName>
+              <S.UserName>{userdata[0][1].nickname}</S.UserName>
               {userChat?.map(list => {
                 return (
                   <S.ContentsContainer>
