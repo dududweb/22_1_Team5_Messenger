@@ -5,6 +5,7 @@ import ChatContentsList from './ChatContentsList';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { add_user_inputText } from '../../redux/action/inputChatAction';
+import { delete_user_inputText } from '../../redux/action/deleteAction';
 
 export default function ChatRoom() {
   const dispatch = useDispatch();
@@ -12,6 +13,11 @@ export default function ChatRoom() {
   const userChat = useSelector(state => state.input.chat);
   const [userMessage, setUserMessage] = useState('');
   const [ChatContents, setChatContents] = useState();
+
+  console.log('userdata', userdata);
+  // console.log('userChat', userChat);
+  // console.log('ChatContents', ChatContents);
+  // console.log('userMessage', userMessage);
 
   useEffect(() => {
     axios
@@ -50,6 +56,10 @@ export default function ChatRoom() {
     }
   };
 
+  const onRemove = userId => {
+    dispatch(delete_user_inputText(userId));
+  };
+
   return (
     <>
       <S.Container>
@@ -70,9 +80,13 @@ export default function ChatRoom() {
               <S.UserName>{userdata[1].nickname}</S.UserName>
               {userChat?.map(list => {
                 return (
-                  <S.TypingText key={list.id}>
-                    {list.chatList.chatList}
-                  </S.TypingText>
+                  <S.ContentsContainer>
+                    <S.TypingText key={list.id}>
+                      {list.chatList.chatList}
+                    </S.TypingText>
+                    <S.Reply />
+                    <S.Delete onClick={() => onRemove(list.id)} />
+                  </S.ContentsContainer>
                 );
               })}
             </span>

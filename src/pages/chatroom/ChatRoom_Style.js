@@ -4,6 +4,8 @@ import { HiOutlineEmojiHappy } from 'react-icons/hi';
 import { MdAlternateEmail } from 'react-icons/md';
 import { FiSend } from 'react-icons/fi';
 import { CgFormatText } from 'react-icons/cg';
+import { TiDeleteOutline } from 'react-icons/ti';
+import { HiOutlineReply } from 'react-icons/hi';
 
 export const Container = styled.div`
   height: calc(100vh - 84px);
@@ -117,4 +119,13 @@ export const UserName = styled.div`
 export const TypingText = styled.div`
   font-size: 16px;
   padding: 4px 0;
+  margin-right: 20px;
 `;
+
+export const ContentsContainer = styled.div`
+  display: flex;
+`;
+
+export const Delete = styled(TiDeleteOutline)``;
+
+export const Reply = styled(HiOutlineReply)``;
