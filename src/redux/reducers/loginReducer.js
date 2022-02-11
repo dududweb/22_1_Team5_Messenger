@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT } from '../action/action.js';
+import { LOGIN, LOGOUT } from '../action/loginAction';
 
 const initialState = {
   userinfo: {
@@ -7,7 +7,7 @@ const initialState = {
   },
 };
 
-export const reducer = (state = initialState, action) => {
+export const loginReducer = (state = initialState, action) => {
   const newState = { ...state };
 
   if (action.type === LOGIN) {

@@ -43,11 +43,6 @@ export default function ChatRoom() {
     setInput('');
   };
 
-  // const handleClick = () => {
-  //   const userInputData = input2;
-
-  //   dispatch(add_user_inputText(userInputData));
-  // };
   // ============================================================
 
   return (
@@ -63,11 +58,11 @@ export default function ChatRoom() {
             return <ChatContentsList key={i} contents={contents} />;
           })}
         </div>
-        {/* <div>
-          {userChat.map(list => {
+        <div>
+          {userChat?.map(list => {
             return <div key={list.id}>{list.chatList.chatList}</div>;
           })}
-        </div> */}
+        </div>
       </S.Container>
       <S.MessageEditorContainer>
         <S.MessageEditorWrapper>

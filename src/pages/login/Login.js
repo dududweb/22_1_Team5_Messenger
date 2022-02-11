@@ -1,7 +1,7 @@
 import * as S from './Login_Style';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { add_loginUser_info } from '../../redux/action/action.js';
+import { add_loginUser_info } from '../../redux/action/loginAction';
 import { useNavigate } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
