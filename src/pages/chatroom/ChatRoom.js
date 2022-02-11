@@ -4,15 +4,15 @@ import * as S from './ChatRoom_Style';
 import ChatContentsList from './ChatContentsList';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { add_user_inputText } from '../../redux/action/action.js';
+import { add_user_inputText } from '../../redux/action/inputChatAction';
 
 export default function ChatRoom() {
   const dispatch = useDispatch();
+  const userdata = useSelector(state => state.userinfo);
+  const userChat = useSelector(state => state.chat);
   let [ChatContents, setChatContents] = useState();
-  const selector = useSelector(state => state.userinfo);
-  const selector2 = useSelector(state => state.chat);
-  console.log(selector);
-  console.log(selector2);
+  console.log(userdata);
+  console.log(userChat);
 
   useEffect(() => {
     axios
@@ -25,9 +25,7 @@ export default function ChatRoom() {
 
   // ============================================================
   const [input, setInput] = useState('');
-  const [input2, setInput2] = useState([]);
   console.log(input);
-  console.log(input2);
 
   const handleChange2 = e => {
     const { value } = e.target;
@@ -36,12 +34,13 @@ export default function ChatRoom() {
 
   const handleChange3 = e => {
     e.preventDefault();
-    setInput2([...input2, input]);
-    setInput('');
 
-    const userInputData = input2;
+    const userInputData = {
+      chatList: input,
+    };
 
     dispatch(add_user_inputText(userInputData));
+    setInput('');
   };
 
   // const handleClick = () => {
@@ -64,14 +63,14 @@ export default function ChatRoom() {
             return <ChatContentsList key={i} contents={contents} />;
           })}
         </div>
-        <div>
-          {/* <div>{selector[1].nickname}</div>
-          <div>{selector[1].userEmail}</div>
-          <div>{selector[1].contents}</div> */}
-        </div>
+        {/* <div>
+          {userChat.map(list => {
+            return <div key={list.id}>{list.chatList.chatList}</div>;
+          })}
+        </div> */}
       </S.Container>
       <S.MessageEditorContainer>
-        <S.MessageEditorWrapper onClick={handleChange3}>
+        <S.MessageEditorWrapper>
           <S.PlusIcon />
           <S.TextInput
             placeholder="Enter message"
@@ -82,7 +81,7 @@ export default function ChatRoom() {
             <S.TextIcon />
             <S.AtSignIcon />
             <S.EmojiIcon />
-            <S.EnterIcon />
+            <S.EnterIcon onClick={handleChange3} />
           </div>
         </S.MessageEditorWrapper>
       </S.MessageEditorContainer>
