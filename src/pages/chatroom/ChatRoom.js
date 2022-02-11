@@ -2,17 +2,17 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import * as S from './ChatRoom_Style';
 import ChatContentsList from './ChatContentsList';
-import { useSelector, useDispatch } from 'react-redux';
-import { add_user_inputText } from '../../redux/action/action.js';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { add_user_inputText } from '../../redux/action/inputChatAction';
 
 export default function ChatRoom() {
   const dispatch = useDispatch();
+  const userdata = useSelector(state => state.userinfo);
+  const userChat = useSelector(state => state.chat);
   let [ChatContents, setChatContents] = useState();
-  const [chatInput, setChatInput] = useState('');
-  const selector = useSelector(state => state.userinfo);
-  const selector2 = useSelector(state => state);
-  // console.log(selector);
-  console.log(selector2);
+  console.log(userdata);
+  console.log(userChat);
 
   useEffect(() => {
     axios
@@ -23,20 +23,26 @@ export default function ChatRoom() {
       .catch(error => setChatContents(error));
   }, []);
 
-  const getChatInput = e => {
+  const [input, setInput] = useState('');
+  console.log(input);
+
+  const handleChange2 = e => {
     const { value } = e.target;
-    setChatInput(value);
+    setInput(value);
   };
 
-  const submitChat = e => {
+  const handleChange3 = e => {
     e.preventDefault();
-    dispatch(add_user_inputText(chatInput));
-    setChatInput('');
+
+    const userInputData = {
+      chatList: input,
+    };
+
+    dispatch(add_user_inputText(userInputData));
+    setInput('');
   };
 
-  const handleKeyPress = e => {
-    e.key === 'Enter' && submitChat();
-  };
+  // ============================================================
 
   return (
     <>
@@ -52,9 +58,9 @@ export default function ChatRoom() {
           })}
         </div>
         <div>
-          {/* <div>{selector[1].nickname}</div>
-          <div>{selector[1].userEmail}</div>
-          <div>{selector[1].contents}</div> */}
+          {userChat?.map(list => {
+            return <div key={list.id}>{list.chatList.chatList}</div>;
+          })}
         </div>
       </S.Container>
       <S.MessageEditorContainer>
@@ -62,15 +68,14 @@ export default function ChatRoom() {
           <S.PlusIcon />
           <S.TextInput
             placeholder="Enter message"
-            onChange={getChatInput}
-            value={chatInput}
-            onKeyDown={handleKeyPress}
+            onChange={handleChange2}
+            value={input}
           />
           <div>
             <S.TextIcon />
             <S.AtSignIcon />
             <S.EmojiIcon />
-            <S.EnterIcon onClick={submitChat} />
+            <S.EnterIcon onClick={handleChange3} />
           </div>
         </S.MessageEditorWrapper>
       </S.MessageEditorContainer>
