@@ -1,7 +1,7 @@
 import * as S from './ChatContentsList_Style';
 import ChatContent from './ChatContent';
 
-export default function ChatContentsList({ contents, i }) {
+export default function ChatContentsList({ contents, i, DeleteInput }) {
   return (
     <S.ContentsWrapper>
       <S.UserImage src={contents.profileImage} />
@@ -12,7 +12,7 @@ export default function ChatContentsList({ contents, i }) {
         </S.UserNameDateWrapper>
 
         {contents.content.map((data, i) => {
-          return <ChatContent key={i} data={data} />;
+          return <ChatContent key={i} data={data} DeleteInput={DeleteInput} />;
         })}
       </div>
     </S.ContentsWrapper>

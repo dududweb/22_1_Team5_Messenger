@@ -14,6 +14,11 @@ export default function ChatRoom() {
   console.log(userdata);
   console.log(userChat);
 
+  const [Reply, setReply] = useState(false);
+
+  function DeleteInput() {
+    setReply(prev => !prev);
+  }
   useEffect(() => {
     axios
       .get('/data/data.json')
@@ -46,40 +51,97 @@ export default function ChatRoom() {
   // ============================================================
 
   return (
-    <>
-      <S.Container>
-        <S.LineWrapper>
-          <S.Line />
-          <S.DayText>Today</S.DayText>
-          <S.Line />
-        </S.LineWrapper>
+    <div>
+      {Reply ? (
         <div>
-          {ChatContents?.map((contents, i) => {
-            return <ChatContentsList key={i} contents={contents} />;
-          })}
+          <S.Container>
+            <S.LineWrapper>
+              <S.Line />
+              <S.DayText>Today</S.DayText>
+              <S.Line />
+            </S.LineWrapper>
+            <div>
+              {ChatContents?.map((contents, i) => {
+                return <ChatContentsList key={i} contents={contents} />;
+              })}
+            </div>
+            <div>
+              {userChat?.map(list => {
+                return <div key={list.id}>{list.chatList.chatList}</div>;
+              })}
+            </div>
+          </S.Container>
+          <S.MessageEditorContainer>
+            <S.ReplyContainer>
+              <S.ReplyBox>
+                <S.ReplyIconBox>
+                  <S.ReplyIcon />
+                </S.ReplyIconBox>
+                <S.TextBox>DATA 에게 답장</S.TextBox>
+                <S.Textdetail>바보똥개 멍청이</S.Textdetail>
+                <S.TextDate>2202.01.13</S.TextDate>
+                <S.DeleteIcon onClick={DeleteInput} />
+              </S.ReplyBox>
+            </S.ReplyContainer>
+            <S.MessageEditorWrapper>
+              <S.PlusIcon />
+              <S.TextInput
+                placeholder="Enter message"
+                onChange={handleChange2}
+                value={input}
+              />
+              <div>
+                <S.TextIcon />
+                <S.AtSignIcon />
+                <S.EmojiIcon />
+                <S.EnterIcon onClick={handleChange3} />
+              </div>
+            </S.MessageEditorWrapper>
+          </S.MessageEditorContainer>
         </div>
-        <div>
-          {userChat?.map(list => {
-            return <div key={list.id}>{list.chatList.chatList}</div>;
-          })}
-        </div>
-      </S.Container>
-      <S.MessageEditorContainer>
-        <S.MessageEditorWrapper>
-          <S.PlusIcon />
-          <S.TextInput
-            placeholder="Enter message"
-            onChange={handleChange2}
-            value={input}
-          />
-          <div>
-            <S.TextIcon />
-            <S.AtSignIcon />
-            <S.EmojiIcon />
-            <S.EnterIcon onClick={handleChange3} />
-          </div>
-        </S.MessageEditorWrapper>
-      </S.MessageEditorContainer>
-    </>
+      ) : (
+        <>
+          <S.Container>
+            <S.LineWrapper>
+              <S.Line />
+              <S.DayText>Today</S.DayText>
+              <S.Line />
+            </S.LineWrapper>
+            <div>
+              {ChatContents?.map((contents, i) => {
+                return (
+                  <ChatContentsList
+                    key={i}
+                    contents={contents}
+                    DeleteInput={DeleteInput}
+                  />
+                );
+              })}
+            </div>
+            <div>
+              {userChat?.map(list => {
+                return <div key={list.id}>{list.chatList.chatList}</div>;
+              })}
+            </div>
+          </S.Container>
+          <S.MessageEditorContainer>
+            <S.MessageEditorWrapper>
+              <S.PlusIcon />
+              <S.TextInput
+                placeholder="Enter message"
+                onChange={handleChange2}
+                value={input}
+              />
+              <div>
+                <S.TextIcon />
+                <S.AtSignIcon />
+                <S.EmojiIcon />
+                <S.EnterIcon onClick={handleChange3} />
+              </div>
+            </S.MessageEditorWrapper>
+          </S.MessageEditorContainer>
+        </>
+      )}
+    </div>
   );
 }
