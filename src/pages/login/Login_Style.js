@@ -21,11 +21,11 @@ export const LoginWrap = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 20px;
 `;
 
-export const LoginTitle = styled.h1`
-  font-size: 28px;
+export const LoginTitle = styled.blockquote`
+  font-size: 30px;
   font-weight: bold;
 `;
 
@@ -51,7 +51,7 @@ export const ProfilePreviewImage = styled.img.attrs(props => ({
 `;
 
 export const UploadBtn = styled.label.attrs({
-  for: 'fileInput',
+  htmlFor: 'fileInput',
 })`
   position: absolute;
   right: 0;
