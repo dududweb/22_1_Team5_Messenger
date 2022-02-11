@@ -1,9 +1,11 @@
 import * as S from './Login_Style';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { add_loginUser_info } from '../../redux/action/loginAction';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  add_loginUser_info,
+  add_ProfileImage,
+} from '../../redux/action/loginAction';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import ProfileDefaultImg from '../../assets/icons/profile-default.jpeg';
 
 export default function Login() {
@@ -15,7 +17,6 @@ export default function Login() {
     privewImgUrl: '',
     profileFile: '',
   });
-
   const uploadImage = e => {
     e.preventDefault();
     let reader = new FileReader();
@@ -28,7 +29,8 @@ export default function Login() {
     };
     reader.readAsDataURL(file);
   };
-  console.log(profileImage.privewImgUrl);
+
+  dispatch(add_ProfileImage(profileImage.privewImgUrl));
 
   const changeUserIdInput = e => {
     const { value } = e.target;
@@ -44,17 +46,20 @@ export default function Login() {
       userEmail: userEmail,
       nickname: userNickname,
     };
-    // console.log('userInputData', userInputData);
     dispatch(add_loginUser_info(userInputData));
     setUserEmail('');
     navigate('/main');
   };
 
   const handleKeyPress = e => {
+    e.preventDefault();
     if (e.key === 'Enter') {
-      if (userEmail && userNickname === true) {
+      if (userEmail && userNickname !== '') {
         setUserEmail();
         setUserNickname();
+        navigate('/main');
+      } else {
+        alert('아이디와 닉네임을 모두 입력해주세요.');
       }
     }
   };
@@ -85,13 +90,13 @@ export default function Login() {
             <S.UserIdInput
               onChange={changeUserIdInput}
               value={userEmail}
-              onKeyDown={handleKeyPress}
+              onKeyUp={handleKeyPress}
             />
             <S.Label>닉네임</S.Label>
             <S.UserNicknameInput
               onChange={changeUserNicknameInput}
               value={userNickname}
-              onKeyDown={handleKeyPress}
+              onKeyUp={handleKeyPress}
             />
             <S.FormSubmit onClick={saveUserDataInStore}>Start Now</S.FormSubmit>
           </S.LoginForm>

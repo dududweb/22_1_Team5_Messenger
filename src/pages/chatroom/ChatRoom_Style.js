@@ -9,7 +9,7 @@ export const Container = styled.div`
   height: calc(100vh - 84px);
   padding: 4 20px;
   background-color: #f1f1f1;
-  overflow: scroll;
+  overflow: auto;
 `;
 
 export const LineWrapper = styled.div`
@@ -38,7 +38,7 @@ export const MessageEditorContainer = styled.div`
   padding: 20px;
 `;
 
-export const MessageEditorWrapper = styled.form`
+export const MessageEditorWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -94,4 +94,27 @@ export const EnterIcon = styled(FiSend)`
   background-color: #e6e6e8;
   margin-right: 4px;
   cursor: pointer;
+`;
+
+export const UserImage = styled.img`
+  src: url(${props => props.src});
+  background-color: #fff;
+  width: 40px;
+  height: 40px;
+  margin: 0 20px;
+  border-radius: 50%;
+  overflow: hidden;
+`;
+
+export const UserMessageContainer = styled.div`
+  display: flex;
+`;
+
+export const UserName = styled.div`
+  font-size: 16px;
+  font-weight: 700;
+`;
+export const TypingText = styled.div`
+  font-size: 16px;
+  padding: 4px 0;
 `;
