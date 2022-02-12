@@ -4,7 +4,10 @@ import * as S from './ChatRoom_Style';
 import ChatContentsList from './ChatContentsList';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { add_user_inputText } from '../../redux/action/inputChatAction';
+import {
+  add_user_inputText,
+  add_current_date,
+} from '../../redux/action/inputChatAction';
 import { delete_user_inputText } from '../../redux/action/deleteAction';
 
 export default function ChatRoom() {
