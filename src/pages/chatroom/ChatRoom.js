@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import * as S from './ChatRoom_Style';
 import ChatContentsList from './ChatContentsList';
@@ -8,10 +8,12 @@ import { add_user_inputText } from '../../redux/action/inputChatAction';
 
 export default function ChatRoom() {
   const dispatch = useDispatch();
+  const scrollRef = useRef();
   const userdata = useSelector(state => state.login.userinfo);
   const userChat = useSelector(state => state.input.chat);
   const [userMessage, setUserMessage] = useState('');
   const [ChatContents, setChatContents] = useState();
+  // const [chatHeight, setChatHeight] = useState();
 
   useEffect(() => {
     axios
@@ -50,9 +52,31 @@ export default function ChatRoom() {
     }
   };
 
+  const scrollToBottom = () => {
+    scrollRef.current.scrollIntoView.scrollTo(
+      0,
+      scrollRef.current.scrollHeight
+    );
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [userChat]);
+
+  // scrollView.scrollTo((x = 0), (y = `View의 y position`));
+
+  // useEffect(() => {
+  //   height();
+  // }, [userMessage]);
+  // const height = () => {
+  //   setChatHeight(scrollRef.current?.scrollHeight);
+  // };
+  // console.log('높이', scrollRef.current?.scrollHeight);
+  // console.log(chatHeight);
+
   return (
     <>
-      <S.Container>
+      <S.Container ref={scrollRef}>
         <S.LineWrapper>
           <S.Line />
           <S.DayText>Today</S.DayText>
@@ -66,8 +90,8 @@ export default function ChatRoom() {
         {userChat.length >= 1 && (
           <S.UserMessageContainer>
             <S.UserImage src="https://images.unsplash.com/photo-1534196511436-921a4e99f297?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" />
-            <span>
-              <S.UserName>{userdata[1].nickname}</S.UserName>
+            <S.TextArea>
+              <S.UserName>{userdata[1].nickname} *</S.UserName>
               {userChat?.map(list => {
                 return (
                   <S.TypingText key={list.id}>
@@ -75,7 +99,7 @@ export default function ChatRoom() {
                   </S.TypingText>
                 );
               })}
-            </span>
+            </S.TextArea>
           </S.UserMessageContainer>
         )}
       </S.Container>

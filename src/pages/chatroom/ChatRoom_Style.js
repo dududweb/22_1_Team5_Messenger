@@ -6,7 +6,7 @@ import { FiSend } from 'react-icons/fi';
 import { CgFormatText } from 'react-icons/cg';
 
 export const Container = styled.div`
-  height: calc(100vh - 84px);
+  height: calc(100vh - 130px);
   padding: 4 20px;
   background-color: #f1f1f1;
   overflow: auto;
@@ -118,3 +118,4 @@ export const TypingText = styled.div`
   font-size: 16px;
   padding: 4px 0;
 `;
+export const TextArea = styled.span``;
