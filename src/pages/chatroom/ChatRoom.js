@@ -17,11 +17,6 @@ export default function ChatRoom() {
   const [userMessage, setUserMessage] = useState('');
   const [ChatContents, setChatContents] = useState();
 
-  console.log('userdata', userdata);
-  // console.log('userChat', userChat);
-  // console.log('ChatContents', ChatContents);
-  // console.log('userMessage', userMessage);
-
   const [Reply, setReply] = useState(false);
 
   function DeleteInput() {
@@ -92,14 +87,14 @@ export default function ChatRoom() {
             <S.UserImage src={userdata[1]} />
             <span>
               <S.UserName>{userdata[0][1].nickname}</S.UserName>
-              {userChat?.map(list => {
+              {userChat?.map((list, i) => {
                 return (
-                  <S.ContentsContainer>
+                  <S.ContentsContainer key={i}>
                     <S.TypingText key={list.id}>
                       {list.chatList.chatList}
                     </S.TypingText>
                     <S.Reply onClick={DeleteInput} />
-                    <S.Delete />
+                    <S.Delete onClick={() => onRemove(list.id)} />
                   </S.ContentsContainer>
                 );
               })}
