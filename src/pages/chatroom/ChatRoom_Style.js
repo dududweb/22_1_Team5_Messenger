@@ -144,6 +144,7 @@ export const EnterIcon = styled(FiSend)`
 export const UserImage = styled.img`
   src: url(${props => props.src});
   background-color: #fff;
+  object-fit: cover;
   width: 40px;
   height: 40px;
   margin: 0 20px;
@@ -173,3 +174,9 @@ export const ContentsContainer = styled.div`
 export const Delete = styled(TiDeleteOutline)``;
 
 export const Reply = styled(HiOutlineReply)``;
+
+export const Date = styled.span`
+  font-size: 12px;
+  font-weight: normal;
+  color: #8b8e95;
+`;

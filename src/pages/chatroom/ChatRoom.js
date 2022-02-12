@@ -8,14 +8,19 @@ import {
   add_user_inputText,
   add_user_inputText_delete,
 } from '../../redux/action/inputChatAction';
+import { add_current_date } from '../../redux/action/dateNowAction';
+import { getClock } from '../../utils';
 
 export default function ChatRoom() {
   const dispatch = useDispatch();
   const scrollRef = useRef();
   const userdata = useSelector(state => state.login.userinfo);
+  const chatDate = useSelector(state => state.chatdate);
   const userChat = useSelector(state => state.input.chat);
   const [userMessage, setUserMessage] = useState('');
   const [ChatContents, setChatContents] = useState();
+  const date = getClock();
+
   const [Reply, setReply] = useState(false);
 
   function DeleteInput() {
@@ -49,11 +54,13 @@ export default function ChatRoom() {
   const pressUserInputTextDispatch = e => {
     const userInputData = {
       chatList: userMessage,
+      date: date,
     };
 
     if (e.key === 'Enter') {
       if (userMessage !== '') {
         dispatch(add_user_inputText(userInputData));
+        dispatch(add_current_date(date));
         setUserMessage('');
       }
     }
@@ -92,7 +99,9 @@ export default function ChatRoom() {
           <S.UserMessageContainer>
             <S.UserImage src={userdata[1]} />
             <S.TextArea>
-              <S.UserName>{userdata[0][1].nickname}</S.UserName>
+              <S.UserName>
+                {userdata[0][1].nickname} * <S.Date>{chatDate[1]}</S.Date>
+              </S.UserName>
               {userChat?.map((list, i) => {
                 return (
                   <S.ContentsContainer key={i}>

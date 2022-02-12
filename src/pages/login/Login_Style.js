@@ -44,7 +44,9 @@ export const RoundProfile = styled.div`
 `;
 
 export const ProfilePreviewImage = styled.img.attrs(props => ({}))`
-  width: 100%;
+  object-fit: cover;
+  width: 60px;
+  height: 60px;
 `;
 
 export const UploadBtn = styled.label.attrs({
