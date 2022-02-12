@@ -4,12 +4,13 @@
 로그인 기능
 
 
+![Swit - Chrome 1](https://user-images.githubusercontent.com/84889602/153701527-df004d81-fda4-41da-b302-bf4ff2d56fef.gif)
 
-https://user-images.githubusercontent.com/84889602/153701354-ddec3dc0-aa58-40b5-8ed5-759b7460bd93.mp4
 
 채팅방 기능
 
 
+![Swit - Chrome 2](https://user-images.githubusercontent.com/84889602/153701532-bc9ecfee-8be9-46ab-bb04-1fd6ded4d441.gif)
 
 
 
