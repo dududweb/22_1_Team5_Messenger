@@ -1,4 +1,4 @@
-import { CHAT, DATE_NOW } from '../action/inputChatAction';
+import { CHAT, DELETE, DATE_NOW } from '../action/inputChatAction';
 
 const initialState = {
   chat: [],
@@ -12,6 +12,8 @@ export const inputReducer = (state = initialState, action) => {
     return {
       chat: [...newState.chat, action.chatList],
     };
+  } else if (action.type === DELETE) {
+    return { chat: state.chat.filter(chat => chat.id !== action.chatId) };
   } else if (action.type === DATE_NOW) {
     return {
       chat: [...newState.chat, action.date],
