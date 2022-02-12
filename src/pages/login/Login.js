@@ -50,12 +50,12 @@ export default function Login() {
   const handleKeyPress = e => {
     e.preventDefault();
     if (e.key === 'Enter') {
-      if (userEmail && userNickname !== '') {
+      if (isLoginActiveButton) {
         setUserEmail();
         setUserNickname();
         navigate('/main');
       } else {
-        alert('아이디와 닉네임을 모두 입력해주세요.');
+        alert('이메일과 닉네임을 모두 입력해주세요.');
       }
     }
   };
@@ -87,7 +87,7 @@ export default function Login() {
             onSubmit={saveUserDataInStore}
             onKeyUp={isPassedLogin}
           >
-            <S.Label>아이디</S.Label>
+            <S.Label>이메일</S.Label>
             <S.UserIdInput
               name="userEmail"
               onChange={changeUserIdInput}
