@@ -1,6 +1,17 @@
 # Team5 응급코딩과 🚑
 
 ## 프로젝트 소개
+로그인 기능
+
+
+
+https://user-images.githubusercontent.com/84889602/153701354-ddec3dc0-aa58-40b5-8ed5-759b7460bd93.mp4
+
+채팅방 기능
+
+
+
+
 
 채팅 메신저 구현 <br/>
 Redux, React-Redux를 활용하여 전역 상태 관리
@@ -55,8 +66,10 @@ Redux, React-Redux를 활용하여 전역 상태 관리
 
 - [`김재호`]
 
-  -
-  -
+  -헤더 레이아웃 구현
+  -답장기능 레이아웃 작성
+  -답장 컴포넌트 조건부 랜더링으로 실행 및 userName과 Date 정보 출력
+  
 
 - [`김태영`]
 
@@ -74,7 +87,7 @@ Redux, React-Redux를 활용하여 전역 상태 관리
 
   - 채팅창 레이아웃 구현
   - mock data 데이터 바인딩
-  - redux를 활용하여 삭제 로직 구현중
+  - redux를 활용하여 삭제 로직 초안작성
 
 - [`황주영`]
 
