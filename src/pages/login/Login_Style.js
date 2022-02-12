@@ -97,7 +97,7 @@ export const Label = styled.label`
 
 export const UserIdInput = styled.input.attrs({
   type: 'text',
-  placeholder: 'ID를 입력해주세요.',
+  placeholder: '이메일을 입력해주세요.',
 })`
   width: 100%;
   padding: 10px;
@@ -116,12 +116,14 @@ export const UserNicknameInput = styled.input.attrs({
 `;
 
 export const FormSubmit = styled.button.attrs({
-  type: 'button',
+  type: 'submit',
 })`
   margin-top: 40px;
   padding: 10px 30px;
   border: none;
   border-radius: 5px;
   color: #fff;
-  background-color: #478bff;
+  cursor: default;
+  background-color: ${props =>
+    props.isLoginActiveButton ? '#478bff' : '#cbcbcb'};
 `;

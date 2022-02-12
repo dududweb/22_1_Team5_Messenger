@@ -60,6 +60,13 @@ export default function Login() {
     }
   };
 
+  const isLoginActiveButton =
+    userEmail.includes('@') && userNickname.length > 0;
+
+  const isPassedLogin = () => {
+    return !isLoginActiveButton;
+  };
+
   return (
     <>
       <S.Logo />
@@ -75,20 +82,29 @@ export default function Login() {
             </S.UploadBtn>
             <S.ProfileUpload onChange={uploadImage} />
           </S.ProfileContainer>
-          <S.LoginForm method="POST" onSubmit={saveUserDataInStore}>
+          <S.LoginForm
+            method="POST"
+            onSubmit={saveUserDataInStore}
+            onKeyUp={isPassedLogin}
+          >
             <S.Label>아이디</S.Label>
             <S.UserIdInput
+              name="userEmail"
               onChange={changeUserIdInput}
               value={userEmail}
               onKeyUp={handleKeyPress}
             />
             <S.Label>닉네임</S.Label>
             <S.UserNicknameInput
+              name="nickname"
               onChange={changeUserNicknameInput}
               value={userNickname}
               onKeyUp={handleKeyPress}
             />
-            <S.FormSubmit type="submit" onClick={saveUserDataInStore}>
+            <S.FormSubmit
+              isLoginActiveButton={isLoginActiveButton}
+              disabled={!isLoginActiveButton}
+            >
               Start Now
             </S.FormSubmit>
           </S.LoginForm>
