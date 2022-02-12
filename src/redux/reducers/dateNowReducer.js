@@ -8,7 +8,7 @@ export const dateNowReducer = (state = initialState, action) => {
   if (action.type === DATE_NOW) {
     return {
       ...state,
-      date: state.date,
+      date: action.date,
     };
   } else {
     return state;

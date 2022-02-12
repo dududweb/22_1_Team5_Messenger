@@ -6,7 +6,7 @@ import { dateNowReducer } from './dateNowReducer';
 const rootReducer = combineReducers({
   login: loginReducer,
   input: inputReducer,
-  getdate: dateNowReducer,
+  chatdate: dateNowReducer,
 });
 
 export default rootReducer;
