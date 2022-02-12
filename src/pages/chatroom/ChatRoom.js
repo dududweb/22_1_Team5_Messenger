@@ -5,14 +5,56 @@ import ChatContentsList from './ChatContentsList';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { add_user_inputText } from '../../redux/action/inputChatAction';
+import { add_current_date } from '../../redux/action/dateNowAction';
 import { delete_user_inputText } from '../../redux/action/deleteAction';
 
 export default function ChatRoom() {
   const dispatch = useDispatch();
   const userdata = useSelector(state => state.login.userinfo);
+  const chatDatex = useSelector(state => state);
   const userChat = useSelector(state => state.input.chat);
   const [userMessage, setUserMessage] = useState('');
   const [ChatContents, setChatContents] = useState();
+  const [chatDate, setChatDate] = useState({
+    year: '',
+    month: '',
+    day: '',
+    hour: '',
+    minutes: '',
+    second: '',
+  });
+  const getClock = () => {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hour = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const second = String(date.getSeconds()).padStart(2, '0');
+    setChatDate({
+      year: year,
+      month: month,
+      day: day,
+      hour: hour,
+      minutes: minutes,
+      second: second,
+    });
+    console.log(
+      `${chatDate.year}-${chatDate.month}-${chatDate.day} ${chatDate.hour}:${chatDate.minutes}:${chatDate.second}`
+    );
+    // console.log(
+    //   '현재시간',
+    //   `${year}-${month}-${day} ${hour}:${minutes}:${second}`
+    // );
+  };
+  useEffect(() => {
+    getClock();
+  }, [ChatContents]);
+
+  console.log('reducer', chatDatex);
+  // console.log('userChat', userChat);
+  // console.log('ChatContents', ChatContents);
+  // console.log('userMessage', userMessage);
 
   const [Reply, setReply] = useState(false);
 
@@ -51,6 +93,7 @@ export default function ChatRoom() {
     if (e.key === 'Enter') {
       if (userMessage !== '') {
         dispatch(add_user_inputText(userInputData));
+        dispatch(add_current_date(chatDate));
         setUserMessage('');
       }
     }
@@ -84,14 +127,14 @@ export default function ChatRoom() {
             <S.UserImage src={userdata[1]} />
             <span>
               <S.UserName>{userdata[0][1].nickname}</S.UserName>
-              {userChat?.map((list, i) => {
+              {userChat?.map(list => {
                 return (
-                  <S.ContentsContainer key={i}>
+                  <S.ContentsContainer>
                     <S.TypingText key={list.id}>
                       {list.chatList.chatList}
                     </S.TypingText>
                     <S.Reply onClick={DeleteInput} />
-                    <S.Delete onClick={() => onRemove(list.id)} />
+                    <S.Delete />
                   </S.ContentsContainer>
                 );
               })}

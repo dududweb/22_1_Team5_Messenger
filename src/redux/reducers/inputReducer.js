@@ -1,8 +1,7 @@
-import { CHAT, DATE_NOW } from '../action/inputChatAction';
+import { CHAT } from '../action/inputChatAction';
 
 const initialState = {
   chat: [],
-  date: '',
 };
 
 export const inputReducer = (state = initialState, action) => {
@@ -11,10 +10,6 @@ export const inputReducer = (state = initialState, action) => {
   if (action.type === CHAT) {
     return {
       chat: [...newState.chat, action.chatList],
-    };
-  } else if (action.type === DATE_NOW) {
-    return {
-      chat: [...newState.chat, action.date],
     };
   } else {
     return state;
