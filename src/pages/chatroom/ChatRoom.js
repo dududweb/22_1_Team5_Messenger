@@ -8,7 +8,6 @@ import {
   add_user_inputText,
   add_user_inputText_delete,
 } from '../../redux/action/inputChatAction';
-// import { delete_user_inputText } from '../../redux/action/deleteAction';
 
 export default function ChatRoom() {
   const dispatch = useDispatch();
@@ -22,6 +21,7 @@ export default function ChatRoom() {
   function DeleteInput() {
     setReply(prev => !prev);
   }
+
   useEffect(() => {
     axios
       .get('/data/data.json')
