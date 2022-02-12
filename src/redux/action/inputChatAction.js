@@ -2,6 +2,7 @@ export const CHAT = 'CHAT';
 export const DELETE = 'DELETE';
 
 let id = 1;
+let date = '';
 
 export const add_user_inputText = userInputData => {
   return {
@@ -10,6 +11,7 @@ export const add_user_inputText = userInputData => {
       id: id++,
       chatList: userInputData,
     },
+    date,
   };
 };
 export const add_user_inputText_delete = chatId => {
