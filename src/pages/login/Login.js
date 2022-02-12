@@ -6,14 +6,15 @@ import {
   add_ProfileImage,
 } from '../../redux/action/loginAction';
 import { useNavigate } from 'react-router-dom';
-import ProfileDefaultImg from '../../assets/icons/profile-default.jpeg';
 
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [userEmail, setUserEmail] = useState('');
   const [userNickname, setUserNickname] = useState('');
-  const [profileImage, setProfileImage] = useState('');
+  const [profileImage, setProfileImage] = useState(
+    'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+  );
 
   const uploadImage = e => {
     e.preventDefault();
@@ -59,6 +60,13 @@ export default function Login() {
     }
   };
 
+  const isLoginActiveButton =
+    userEmail.includes('@') && userNickname.length > 0;
+
+  const isPassedLogin = () => {
+    return !isLoginActiveButton;
+  };
+
   return (
     <>
       <S.Logo />
@@ -67,29 +75,36 @@ export default function Login() {
           <S.LoginTitle>So Swit</S.LoginTitle>
           <S.ProfileContainer>
             <S.RoundProfile>
-              <S.ProfilePreviewImage
-                src={profileImage ? profileImage : ProfileDefaultImg}
-              />
+              <S.ProfilePreviewImage src={profileImage} />
             </S.RoundProfile>
             <S.UploadBtn>
               <S.CameraIcon />
             </S.UploadBtn>
             <S.ProfileUpload onChange={uploadImage} />
           </S.ProfileContainer>
-          <S.LoginForm method="POST" onSubmit={saveUserDataInStore}>
+          <S.LoginForm
+            method="POST"
+            onSubmit={saveUserDataInStore}
+            onKeyUp={isPassedLogin}
+          >
             <S.Label>아이디</S.Label>
             <S.UserIdInput
+              name="userEmail"
               onChange={changeUserIdInput}
               value={userEmail}
               onKeyUp={handleKeyPress}
             />
             <S.Label>닉네임</S.Label>
             <S.UserNicknameInput
+              name="nickname"
               onChange={changeUserNicknameInput}
               value={userNickname}
               onKeyUp={handleKeyPress}
             />
-            <S.FormSubmit type="submit" onClick={saveUserDataInStore}>
+            <S.FormSubmit
+              isLoginActiveButton={isLoginActiveButton}
+              disabled={!isLoginActiveButton}
+            >
               Start Now
             </S.FormSubmit>
           </S.LoginForm>
