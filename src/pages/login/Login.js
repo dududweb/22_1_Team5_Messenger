@@ -6,14 +6,15 @@ import {
   add_ProfileImage,
 } from '../../redux/action/loginAction';
 import { useNavigate } from 'react-router-dom';
-import ProfileDefaultImg from '../../assets/icons/profile-default.jpeg';
 
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [userEmail, setUserEmail] = useState('');
   const [userNickname, setUserNickname] = useState('');
-  const [profileImage, setProfileImage] = useState('');
+  const [profileImage, setProfileImage] = useState(
+    'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+  );
 
   const uploadImage = e => {
     e.preventDefault();
@@ -67,9 +68,7 @@ export default function Login() {
           <S.LoginTitle>So Swit</S.LoginTitle>
           <S.ProfileContainer>
             <S.RoundProfile>
-              <S.ProfilePreviewImage
-                src={profileImage ? profileImage : ProfileDefaultImg}
-              />
+              <S.ProfilePreviewImage src={profileImage} />
             </S.RoundProfile>
             <S.UploadBtn>
               <S.CameraIcon />
