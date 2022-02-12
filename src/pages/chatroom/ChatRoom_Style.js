@@ -9,7 +9,7 @@ import { TiDeleteOutline } from 'react-icons/ti';
 import { HiOutlineReply } from 'react-icons/hi';
 
 export const Container = styled.div`
-  height: calc(100vh - 84px);
+  height: calc(100vh - 130px);
   padding: 4 20px;
   background-color: #f1f1f1;
   overflow: auto;
@@ -164,6 +164,7 @@ export const TypingText = styled.div`
   padding: 4px 0;
   margin-right: 20px;
 `;
+export const TextArea = styled.span``;
 
 export const ContentsContainer = styled.div`
   display: flex;

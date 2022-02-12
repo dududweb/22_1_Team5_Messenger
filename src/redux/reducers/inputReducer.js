@@ -1,4 +1,4 @@
-import { CHAT } from '../action/inputChatAction';
+import { CHAT, DELETE } from '../action/inputChatAction';
 
 const initialState = {
   chat: [],
@@ -11,6 +11,8 @@ export const inputReducer = (state = initialState, action) => {
     return {
       chat: [...newState.chat, action.chatList],
     };
+  } else if (action.type === DELETE) {
+    return { chat: state.chat.filter(chat => chat.id !== action.chatId) };
   } else {
     return state;
   }

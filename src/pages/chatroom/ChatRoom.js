@@ -1,15 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import * as S from './ChatRoom_Style';
 import ChatContentsList from './ChatContentsList';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { add_user_inputText } from '../../redux/action/inputChatAction';
+import {
+  add_user_inputText,
+  add_user_inputText_delete,
+} from '../../redux/action/inputChatAction';
 import { add_current_date } from '../../redux/action/dateNowAction';
-import { delete_user_inputText } from '../../redux/action/deleteAction';
 
 export default function ChatRoom() {
   const dispatch = useDispatch();
+  const scrollRef = useRef();
   const userdata = useSelector(state => state.login.userinfo);
   const chatDatex = useSelector(state => state);
   const userChat = useSelector(state => state.input.chat);
@@ -61,6 +64,7 @@ export default function ChatRoom() {
   function DeleteInput() {
     setReply(prev => !prev);
   }
+
   useEffect(() => {
     axios
       .get('/data/data.json')
@@ -99,13 +103,14 @@ export default function ChatRoom() {
     }
   };
 
-  const onRemove = userId => {
-    dispatch(delete_user_inputText(userId));
+  const removeUserMessage = e => {
+    const id = Number(e.target.id);
+    dispatch(add_user_inputText_delete(id));
   };
 
   return (
     <>
-      <S.Container>
+      <S.Container ref={scrollRef}>
         <S.LineWrapper>
           <S.Line />
           <S.DayText>Today</S.DayText>
@@ -125,20 +130,18 @@ export default function ChatRoom() {
         {userChat.length >= 1 && (
           <S.UserMessageContainer>
             <S.UserImage src={userdata[1]} />
-            <span>
+            <S.TextArea>
               <S.UserName>{userdata[0][1].nickname}</S.UserName>
-              {userChat?.map(list => {
+              {userChat?.map((list, i) => {
                 return (
-                  <S.ContentsContainer>
-                    <S.TypingText key={list.id}>
-                      {list.chatList.chatList}
-                    </S.TypingText>
+                  <S.ContentsContainer key={i}>
+                    <S.TypingText>{list.chatList.chatList}</S.TypingText>
                     <S.Reply onClick={DeleteInput} />
-                    <S.Delete />
+                    <S.Delete id={list.id} onClick={removeUserMessage} />
                   </S.ContentsContainer>
                 );
               })}
-            </span>
+            </S.TextArea>
           </S.UserMessageContainer>
         )}
       </S.Container>

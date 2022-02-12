@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, UPLOAD } from '../action/loginAction';
+import { LOGIN, UPLOAD } from '../action/loginAction';
 
 const initialState = {
   userinfo: {
@@ -14,10 +14,6 @@ export const loginReducer = (state = initialState, action) => {
   if (action.type === LOGIN) {
     return {
       userinfo: [{ ...newState.userinfo }, action.user],
-    };
-  } else if (action.type === LOGOUT) {
-    return {
-      userinfo: [...state.todos.filter(todo => todo.id !== action.id)],
     };
   } else if (action.type === UPLOAD) {
     return {
