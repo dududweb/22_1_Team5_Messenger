@@ -23,7 +23,7 @@ export default function ChatRoom() {
 
   const [Reply, setReply] = useState(false);
 
-  function DeleteInput() {
+  function ReplyInput() {
     setReply(prev => !prev);
   }
 
@@ -90,7 +90,7 @@ export default function ChatRoom() {
               <ChatContentsList
                 key={i}
                 contents={contents}
-                DeleteInput={DeleteInput}
+                ReplyInput={ReplyInput}
               />
             );
           })}
@@ -106,7 +106,7 @@ export default function ChatRoom() {
                 return (
                   <S.ContentsContainer key={i}>
                     <S.TypingText>{list.chatList.chatList}</S.TypingText>
-                    <S.Reply onClick={DeleteInput} />
+                    <S.Reply onClick={ReplyInput} />
                     <S.Delete id={list.id} onClick={removeUserMessage} />
                   </S.ContentsContainer>
                 );
@@ -119,13 +119,11 @@ export default function ChatRoom() {
         {Reply ? (
           <S.ReplyContainer>
             <S.ReplyBox>
-              <S.ReplyIconBox>
-                <S.ReplyIcon />
-              </S.ReplyIconBox>
-              <S.TextBox>DATA 에게 답장</S.TextBox>
-              <S.Textdetail>바보똥개 멍청이</S.Textdetail>
-              <S.TextDate>2202.01.13</S.TextDate>
-              <S.DeleteIcon onClick={DeleteInput} />
+              <>
+                <S.TextBox> {userdata[0][1].nickname}에게 답장</S.TextBox>
+                <S.TextDate>{chatDate[1]}</S.TextDate>
+                <S.DeleteIcon onClick={ReplyInput} />
+              </>
             </S.ReplyBox>
           </S.ReplyContainer>
         ) : null}
