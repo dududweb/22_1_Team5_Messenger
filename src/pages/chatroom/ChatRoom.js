@@ -4,8 +4,11 @@ import * as S from './ChatRoom_Style';
 import ChatContentsList from './ChatContentsList';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { add_user_inputText } from '../../redux/action/inputChatAction';
-import { delete_user_inputText } from '../../redux/action/deleteAction';
+import {
+  add_user_inputText,
+  add_user_inputText_delete,
+} from '../../redux/action/inputChatAction';
+// import { delete_user_inputText } from '../../redux/action/deleteAction';
 
 export default function ChatRoom() {
   const dispatch = useDispatch();
@@ -56,16 +59,9 @@ export default function ChatRoom() {
     }
   };
 
-  // 삭제예정입니다
-  // const scrollToBottom = () => {
-  //   scrollRef.current.scrollIntoView.scrollTo(
-  //     0,
-  //     scrollRef.current.scrollHeight
-  //   );
-  // };
-
-  const onRemove = userId => {
-    dispatch(delete_user_inputText(userId));
+  const onRemove = e => {
+    const id = Number(e.target.id);
+    dispatch(add_user_inputText_delete(id));
   };
 
   return (
@@ -95,11 +91,9 @@ export default function ChatRoom() {
               {userChat?.map((list, i) => {
                 return (
                   <S.ContentsContainer key={i}>
-                    <S.TypingText key={list.id}>
-                      {list.chatList.chatList}
-                    </S.TypingText>
+                    <S.TypingText>{list.chatList.chatList}</S.TypingText>
                     <S.Reply onClick={DeleteInput} />
-                    <S.Delete onClick={() => onRemove(list.id)} />
+                    <S.Delete id={list.id} onClick={onRemove} />
                   </S.ContentsContainer>
                 );
               })}
