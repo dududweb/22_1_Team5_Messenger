@@ -59,7 +59,7 @@ export default function ChatRoom() {
     }
   };
 
-  const onRemove = e => {
+  const removeUserMessage = e => {
     const id = Number(e.target.id);
     dispatch(add_user_inputText_delete(id));
   };
@@ -93,7 +93,7 @@ export default function ChatRoom() {
                   <S.ContentsContainer key={i}>
                     <S.TypingText>{list.chatList.chatList}</S.TypingText>
                     <S.Reply onClick={DeleteInput} />
-                    <S.Delete id={list.id} onClick={onRemove} />
+                    <S.Delete id={list.id} onClick={removeUserMessage} />
                   </S.ContentsContainer>
                 );
               })}
