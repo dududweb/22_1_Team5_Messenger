@@ -72,7 +72,12 @@ export default function ChatRoom() {
 
   const removeUserMessage = e => {
     const id = Number(e.target.id);
-    dispatch(add_user_inputText_delete(id));
+    const index = userChat.map(x => x.id).indexOf(id);
+
+    if (window.confirm(userChat[index].chatList.chatList.slice(0, 10))) {
+      dispatch(add_user_inputText_delete(id));
+    } else {
+    }
   };
 
   return (
