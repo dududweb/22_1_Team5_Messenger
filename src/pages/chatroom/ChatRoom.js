@@ -15,16 +15,11 @@ export default function ChatRoom() {
   const dispatch = useDispatch();
   const scrollRef = useRef();
   const userdata = useSelector(state => state.login.userinfo);
-  const chatDate = useSelector(state => state);
+  const chatDate = useSelector(state => state.chatdate);
   const userChat = useSelector(state => state.input.chat);
   const [userMessage, setUserMessage] = useState('');
   const [ChatContents, setChatContents] = useState();
   const date = getClock();
-
-  console.log('reducer', chatDate);
-  // console.log('userChat', userChat);
-  // console.log('ChatContents', ChatContents);
-  // console.log('userMessage', userMessage);
 
   const [Reply, setReply] = useState(false);
 
@@ -59,6 +54,7 @@ export default function ChatRoom() {
   const pressUserInputTextDispatch = e => {
     const userInputData = {
       chatList: userMessage,
+      date: date,
     };
 
     if (e.key === 'Enter') {
@@ -103,7 +99,9 @@ export default function ChatRoom() {
           <S.UserMessageContainer>
             <S.UserImage src={userdata[1]} />
             <S.TextArea>
-              <S.UserName>{userdata[0][1].nickname}</S.UserName>
+              <S.UserName>
+                {userdata[0][1].nickname} * <S.Date>{chatDate[1]}</S.Date>
+              </S.UserName>
               {userChat?.map((list, i) => {
                 return (
                   <S.ContentsContainer key={i}>
